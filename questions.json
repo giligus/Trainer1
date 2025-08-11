@@ -1,0 +1,392 @@
+[
+  {
+    "question_text": "Require time-bound, approvable elevation for Global Administrator. Which service should you use?",
+    "options": [
+      "Azure AD Conditional Access",
+      "Microsoft Defender for Cloud",
+      "Microsoft Entra Privileged Identity Management (PIM)",
+      "Azure Policy"
+    ],
+    "answerIndex": 2,
+    "explanation": "PIM provides just-in-time activation, approval workflows, MFA, and auditing for privileged roles.",
+    "topic_id": "AZ-500: Azure Security",
+    "difficulty": "medium"
+  },
+  {
+    "question_text": "Enforce HTTPS-only on all new Storage accounts at creation time.",
+    "options": [
+      "Azure Monitor Alert",
+      "Azure Policy with Deny effect",
+      "NSG allow rule",
+      "Azure Advisor recommendation"
+    ],
+    "answerIndex": 1,
+    "explanation": "Azure Policy with a Deny effect blocks creation of noncompliant resources so only HTTPS is allowed.",
+    "topic_id": "AZ-500: Azure Security",
+    "difficulty": "medium"
+  },
+  {
+    "question_text": "Open RDP to a VM only temporarily and with audit trail.",
+    "options": [
+      "Application Gateway WAF",
+      "Just-in-time VM access (Defender for Cloud)",
+      "Always-on DNAT in Azure Firewall",
+      "NSG default rules"
+    ],
+    "answerIndex": 1,
+    "explanation": "JIT VM access locks ports by default and opens them for a limited, approved window.",
+    "topic_id": "AZ-500: Azure Security",
+    "difficulty": "medium"
+  },
+  {
+    "question_text": "Store secrets for apps without using client secrets; app must authenticate to Key Vault without credentials.",
+    "options": [
+      "Service principal with password",
+      "Managed identity",
+      "SAS token",
+      "Custom header"
+    ],
+    "answerIndex": 1,
+    "explanation": "Managed identity eliminates secrets and lets the app obtain tokens for Key Vault via Azure AD.",
+    "topic_id": "AZ-500: Azure Security",
+    "difficulty": "medium"
+  },
+  {
+    "question_text": "Detect and remediate suspicious activities across Azure, M365, and AWS with analytics and SOAR.",
+    "options": [
+      "Azure Monitor",
+      "Microsoft Sentinel",
+      "Azure Advisor",
+      "Azure Security Benchmark dashboard"
+    ],
+    "answerIndex": 1,
+    "explanation": "Microsoft Sentinel is a cloud-native SIEM/SOAR for multi-cloud and hybrid data sources.",
+    "topic_id": "AZ-500: Azure Security",
+    "difficulty": "medium"
+  },
+  {
+    "question_text": "Centralize key management, rotation, and access policies for encryption keys.",
+    "options": [
+      "Azure Disk Encryption",
+      "Azure Information Protection",
+      "Azure Key Vault",
+      "Storage Service Encryption"
+    ],
+    "answerIndex": 2,
+    "explanation": "Azure Key Vault stores, controls access to, and rotates keys and secrets securely.",
+    "topic_id": "AZ-500: Azure Security",
+    "difficulty": "medium"
+  },
+  {
+    "question_text": "Block sign-ins from countries where your org does not operate.",
+    "options": [
+      "Azure AD Conditional Access location policy",
+      "Azure Firewall",
+      "Identity Protection risky user policy",
+      "MFA registration policy"
+    ],
+    "answerIndex": 0,
+    "explanation": "Location-based Conditional Access can allow/deny access by country or named locations.",
+    "topic_id": "AZ-500: Azure Security",
+    "difficulty": "medium"
+  },
+  {
+    "question_text": "Ensure only approved container images can deploy to AKS.",
+    "options": [
+      "Azure Policy for Kubernetes (Gatekeeper) allowlist",
+      "NSG rules",
+      "Firewall application rule",
+      "Conditional Access"
+    ],
+    "answerIndex": 0,
+    "explanation": "Azure Policy for AKS enforces allowed registries/images at admission time.",
+    "topic_id": "AZ-500: Azure Security",
+    "difficulty": "medium"
+  },
+  {
+    "question_text": "Encrypt Azure SQL Database at rest using customer-managed keys.",
+    "options": [
+      "Store key in Azure Files",
+      "Store key in Azure Key Vault",
+      "Store key on-prem HSM only",
+      "No key storage needed"
+    ],
+    "answerIndex": 1,
+    "explanation": "CMK for SQL Database uses a key stored in Azure Key Vault.",
+    "topic_id": "AZ-500: Azure Security",
+    "difficulty": "medium"
+  },
+  {
+    "question_text": "Keep Log Analytics data hot for 30 days and archive for 10 years at low cost.",
+    "options": [
+      "Metrics only",
+      "Event Grid",
+      "Log Analytics with archive tier",
+      "Hot blob storage only"
+    ],
+    "answerIndex": 2,
+    "explanation": "Use Log Analytics retention + archive tier to reduce costs for long-term storage.",
+    "topic_id": "AZ-500: Azure Security",
+    "difficulty": "medium"
+  },
+  {
+    "question_text": "Alert when a high-privilege role is assigned in Entra ID (Azure AD).",
+    "options": [
+      "Azure Policy",
+      "PIM alerts and access reviews",
+      "Conditional Access",
+      "Advisor"
+    ],
+    "answerIndex": 1,
+    "explanation": "PIM provides alerts/audit/access reviews for privileged role assignments.",
+    "topic_id": "AZ-500: Azure Security",
+    "difficulty": "medium"
+  },
+  {
+    "question_text": "Protect Key Vault against accidental or malicious deletion of keys and vault.",
+    "options": [
+      "Private endpoint",
+      "Key rotation policy only",
+      "Soft delete + purge protection",
+      "Reader role"
+    ],
+    "answerIndex": 2,
+    "explanation": "Soft delete and purge protection prevent permanent loss and support recovery.",
+    "topic_id": "AZ-500: Azure Security",
+    "difficulty": "medium"
+  },
+  {
+    "question_text": "Require MFA for all privileged accounts in Entra ID.",
+    "options": [
+      "Identity Protection risky sign-in policy",
+      "Conditional Access policy for admin roles",
+      "Password Protection",
+      "Defender for Cloud"
+    ],
+    "answerIndex": 1,
+    "explanation": "Conditional Access can enforce MFA for members of privileged admin roles.",
+    "topic_id": "AZ-500: Azure Security",
+    "difficulty": "medium"
+  },
+  {
+    "question_text": "Limit VM inbound traffic by default and allow approved ports only for limited time.",
+    "options": [
+      "NSG default rules only",
+      "Firewall DNAT",
+      "JIT VM access",
+      "Expose RDP via Bastion public"
+    ],
+    "answerIndex": 2,
+    "explanation": "JIT VM access opens ports only when requested/approved, otherwise denied.",
+    "topic_id": "AZ-500: Azure Security",
+    "difficulty": "medium"
+  },
+  {
+    "question_text": "Make sure new resource groups have a required tag applied automatically.",
+    "options": [
+      "Monitor alert",
+      "Azure Policy with Append effect",
+      "RBAC custom role",
+      "Blueprints only"
+    ],
+    "answerIndex": 1,
+    "explanation": "Policy 'Append' can add required tags upon creation for compliance.",
+    "topic_id": "AZ-500: Azure Security",
+    "difficulty": "medium"
+  },
+  {
+    "question_text": "Grant an external auditor read-only access to activity logs and security info across subscriptions.",
+    "options": [
+      "Owner",
+      "Reader",
+      "Monitoring Reader",
+      "Security Reader"
+    ],
+    "answerIndex": 3,
+    "explanation": "Security Reader provides read access to security-related information tenant-wide.",
+    "topic_id": "AZ-500: Azure Security",
+    "difficulty": "medium"
+  },
+  {
+    "question_text": "Ensure storage accounts are created with CMK encryption only.",
+    "options": [
+      "Key Vault access policies",
+      "RBAC custom role",
+      "Azure Policy with Deny effect",
+      "Resource locks"
+    ],
+    "answerIndex": 2,
+    "explanation": "A Deny policy prevents creation unless the CMK setting is configured.",
+    "topic_id": "AZ-500: Azure Security",
+    "difficulty": "medium"
+  },
+  {
+    "question_text": "Secure RDP/SSH access without exposing public IP/ports.",
+    "options": [
+      "Azure Bastion",
+      "NAT Gateway",
+      "Public Load Balancer",
+      "NSG allow from Internet"
+    ],
+    "answerIndex": 0,
+    "explanation": "Azure Bastion provides browser-based RDP/SSH over TLS via the Azure portal without a public IP on the VM.",
+    "topic_id": "AZ-500: Azure Security",
+    "difficulty": "medium"
+  },
+  {
+    "question_text": "Detect risky sign-ins like unfamiliar locations and apply automated remediation.",
+    "options": [
+      "Defender for Cloud",
+      "Entra ID Identity Protection",
+      "Conditional Access only",
+      "Advisor"
+    ],
+    "answerIndex": 1,
+    "explanation": "Identity Protection detects risky users/sign-ins and can trigger MFA or block via CA.",
+    "topic_id": "AZ-500: Azure Security",
+    "difficulty": "medium"
+  },
+  {
+    "question_text": "Restrict Azure SQL Database connections to a fixed set of client IPs.",
+    "options": [
+      "Transparent Data Encryption",
+      "SQL Server firewall rules",
+      "Azure AD authentication",
+      "SQL auditing"
+    ],
+    "answerIndex": 1,
+    "explanation": "Server/database firewall rules restrict connectivity by IP.",
+    "topic_id": "AZ-500: Azure Security",
+    "difficulty": "medium"
+  },
+  {
+    "question_text": "Automatically rotate a Key Vault key used for encryption with policy-based scheduling.",
+    "options": [
+      "Manual script only",
+      "Key rotation policy in Key Vault",
+      "Azure Policy effect",
+      "Disk Encryption API"
+    ],
+    "answerIndex": 1,
+    "explanation": "Key Vault rotation policy enables automatic rotation based on a schedule or lifetime.",
+    "topic_id": "AZ-500: Azure Security",
+    "difficulty": "medium"
+  },
+  {
+    "question_text": "Centralize and query platform logs (Activity Logs, resource logs) across subscriptions.",
+    "options": [
+      "Azure Monitor Logs (Log Analytics)",
+      "Metrics only",
+      "Event Grid",
+      "Storage account only"
+    ],
+    "answerIndex": 0,
+    "explanation": "Send logs to Log Analytics to centralize, query (KQL), alert and visualize.",
+    "topic_id": "AZ-500: Azure Security",
+    "difficulty": "medium"
+  },
+  {
+    "question_text": "Require private access to Storage account from VNets only, no public internet access.",
+    "options": [
+      "Service endpoint",
+      "Private endpoint",
+      "Firewall application rule",
+      "NSG deny Internet"
+    ],
+    "answerIndex": 1,
+    "explanation": "Private endpoint maps a private IP in your VNet to the Storage account, disabling public access.",
+    "topic_id": "AZ-500: Azure Security",
+    "difficulty": "medium"
+  },
+  {
+    "question_text": "Detect vulnerabilities and misconfigurations in Azure resources and get hardening recommendations.",
+    "options": [
+      "Azure Policy only",
+      "Microsoft Defender for Cloud",
+      "Advisor only",
+      "RBAC"
+    ],
+    "answerIndex": 1,
+    "explanation": "Defender for Cloud provides secure score, recommendations, and threat protection.",
+    "topic_id": "AZ-500: Azure Security",
+    "difficulty": "medium"
+  },
+  {
+    "question_text": "Ensure that only specific Azure regions are allowed for deployment.",
+    "options": [
+      "Management groups only",
+      "Azure Policy with AllowedLocations",
+      "Blueprint artifact only",
+      "Subscription lock"
+    ],
+    "answerIndex": 1,
+    "explanation": "AllowedLocations policy restricts resource deployment to approved regions.",
+    "topic_id": "AZ-500: Azure Security",
+    "difficulty": "medium"
+  },
+  {
+    "question_text": "Require approval before users can elevate to Security Administrator.",
+    "options": [
+      "Conditional Access",
+      "PIM approval workflow",
+      "Access packages only",
+      "Access reviews only"
+    ],
+    "answerIndex": 1,
+    "explanation": "PIM supports approvers and justification for role activation.",
+    "topic_id": "AZ-500: Azure Security",
+    "difficulty": "medium"
+  },
+  {
+    "question_text": "Alert when multiple failed sign-ins followed by a success occur for the same account within minutes.",
+    "options": [
+      "Identity Protection only",
+      "Microsoft Sentinel analytics rule (KQL)",
+      "Advisor alert",
+      "Azure Policy initiative"
+    ],
+    "answerIndex": 1,
+    "explanation": "In Sentinel you can write a rule to correlate events and alert on brute-force behavior.",
+    "topic_id": "AZ-500: Azure Security",
+    "difficulty": "medium"
+  },
+  {
+    "question_text": "Prevent deletion of a critical resource group by mistake.",
+    "options": [
+      "Resource lock (CanNotDelete)",
+      "RBAC Owner",
+      "Policy Audit effect",
+      "Activity Log"
+    ],
+    "answerIndex": 0,
+    "explanation": "A lock with CanNotDelete protects against accidental deletions even by owners.",
+    "topic_id": "AZ-500: Azure Security",
+    "difficulty": "medium"
+  },
+  {
+    "question_text": "Enforce Web Application Firewall protections at Layer 7 for an app behind a load balancer.",
+    "options": [
+      "Azure Firewall only",
+      "Application Gateway WAF",
+      "NSG with HTTP rules",
+      "Traffic Manager"
+    ],
+    "answerIndex": 1,
+    "explanation": "App Gateway WAF provides OWASP-based L7 protection and policies per site.",
+    "topic_id": "AZ-500: Azure Security",
+    "difficulty": "medium"
+  },
+  {
+    "question_text": "Ensure only signed code can run in an Azure Function accessing sensitive data.",
+    "options": [
+      "Managed identity only",
+      "Private endpoint only",
+      "Deployment slot",
+      "Defender for Cloud with Code Integrity/Attestation"
+    ],
+    "answerIndex": 3,
+    "explanation": "Code integrity/attestation ensures only trusted code runs before granting access.",
+    "topic_id": "AZ-500: Azure Security",
+    "difficulty": "medium"
+  }
+]

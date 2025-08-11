@@ -1,0 +1,112 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>AZ-500 Quiz (GitHub Pages)</title>
+  <style>
+    body{font-family:system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial;margin:0;background:#0f172a;color:#e5e7eb}
+    header{padding:16px 20px;border-bottom:1px solid #1f2937;background:#0b1223;position:sticky;top:0}
+    main{max-width:900px;margin:0 auto;padding:16px}
+    .card{background:#111827;border:1px solid #1f2937;border-radius:14px;padding:16px;margin:16px 0;box-shadow:0 10px 30px rgba(0,0,0,.25)}
+    .choices{display:grid;gap:8px;margin-top:8px}
+    label.choice{display:flex;gap:8px;align-items:flex-start;padding:8px;border:1px solid #334155;border-radius:8px;background:#0b1223;cursor:pointer}
+    .actions{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px}
+    button{background:#1f2937;color:#e5e7eb;border:1px solid #374151;padding:10px 14px;border-radius:8px;cursor:pointer}
+    button:hover{border-color:#60a5fa}
+    .ex{color:#9ca3af;margin-top:8px}
+    .correct{border-color:#22c55e}
+    .wrong{border-color:#ef4444}
+    .badge{display:inline-block;background:#172554;color:#93c5fd;border:1px solid #1d4ed8;padding:2px 8px;border-radius:999px;margin-right:8px}
+    .score{font-weight:600;margin-top:8px}
+  </style>
+</head>
+<body>
+  <header><h1>AZ-500 – Quiz Trainer</h1></header>
+  <main>
+    <div class="card">
+      <p>Choose answers and click <strong>Check answers</strong>. Questions are loaded from <code>questions.json</code>.</p>
+      <div id="questions"></div>
+      <div class="actions">
+        <button id="check">Check answers</button>
+        <button id="show">Show solutions</button>
+        <span id="score" class="score"></span>
+      </div>
+    </div>
+  </main>
+  <script>
+    const state = { data: [], selected: {} };
+    const $ = sel => document.querySelector(sel);
+    const $$ = sel => Array.from(document.querySelectorAll(sel));
+
+    async function loadQuestions(){
+      const res = await fetch('questions.json');
+      state.data = await res.json();
+      render();
+    }
+
+    function render(){
+      const root = $('#questions');
+      root.innerHTML = '';
+      state.data.forEach((q, qi)=>{
+        const wrap = document.createElement('div');
+        wrap.className = 'card';
+        wrap.innerHTML = \`
+          <div><span class="badge">Q\${qi+1}</span> \${q.question_text}</div>
+          <div class="choices"></div>
+          <div class="ex" hidden>Answer: <strong></strong><br><span></span></div>
+        \`;
+        const choices = wrap.querySelector('.choices');
+        q.options.forEach((opt, oi)=>{
+          const label = document.createElement('label');
+          label.className = 'choice';
+          label.innerHTML = \`<input type="radio" name="q\${qi}" value="\${oi}"> <span>\${opt}</span>\`;
+          label.addEventListener('click', ()=>{ state.selected[qi] = oi; });
+          choices.appendChild(label);
+        });
+        root.appendChild(wrap);
+      });
+    }
+
+    function check(){
+      let correct = 0;
+      $$('#questions .card').forEach((wrap, qi)=>{
+        const q = state.data[qi];
+        const selected = state.selected[qi];
+        const labels = Array.from(wrap.querySelectorAll('.choice'));
+        labels.forEach((lab, oi)=>{
+          lab.classList.remove('correct', 'wrong');
+          if(oi === q.answerIndex) lab.classList.add('correct');
+          if(selected === oi && selected !== q.answerIndex) lab.classList.add('wrong');
+          const input = lab.querySelector('input');
+          if(selected === oi) input.checked = true;
+        });
+        if(selected === q.answerIndex) correct++;
+        const ex = wrap.querySelector('.ex');
+        ex.querySelector('strong').textContent = q.options[q.answerIndex];
+        ex.querySelector('span').textContent = q.explanation;
+        ex.hidden = false;
+      });
+      $('#score').textContent = \`Score: \${correct}/\${state.data.length}\`;
+    }
+
+    function show(){
+      $$('#questions .card').forEach((wrap, qi)=>{
+        const q = state.data[qi];
+        const labels = Array.from(wrap.querySelectorAll('.choice'));
+        labels.forEach((lab, oi)=>{
+          lab.classList.toggle('correct', oi === q.answerIndex);
+        });
+        const ex = wrap.querySelector('.ex');
+        ex.querySelector('strong').textContent = q.options[q.answerIndex];
+        ex.querySelector('span').textContent = q.explanation;
+        ex.hidden = false;
+      });
+    }
+
+    $('#check').addEventListener('click', check);
+    $('#show').addEventListener('click', show);
+    loadQuestions();
+  </script>
+</body>
+</html>
