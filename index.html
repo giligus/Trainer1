@@ -35,78 +35,50 @@
     </div>
   </main>
   <script>
-    const state = { data: [], selected: {} };
-    const $ = sel => document.querySelector(sel);
-    const $$ = sel => Array.from(document.querySelectorAll(sel));
+const container = document.getElementById('quiz-container');
 
-    async function loadQuestions(){
-      const res = await fetch('questions.json');
-      state.data = await res.json();
-      render();
+async function loadQuestions() {
+  try {
+    const res = await fetch('./questions.json?v=' + Date.now(), { cache: 'no-store' });
+    if (!res.ok) throw new Error('HTTP ' + res.status + ' – ' + res.statusText);
+    const data = await res.json();
+    window.questions = data;
+    renderQuestions();
+  } catch (err) {
+    console.error('Failed to load questions.json:', err);
+    container.innerHTML = '❌ Failed to load questions.json — ' + err.message;
+  }
+}
+
+function renderQuestions() {
+  container.innerHTML = '';
+  window.questions.forEach((q, index) => {
+    let html = `<div class="question"><p>${index + 1}. ${q.question_text}</p><div class="options">`;
+    q.options.forEach((opt, i) => {
+      html += `<label><input type="radio" name="q${index}" value="${i}"> ${opt}</label>`;
+    });
+    html += `</div></div>`;
+    container.innerHTML += html;
+  });
+}
+
+function checkAnswers() {
+  window.questions.forEach((q, index) => {
+    const selected = document.querySelector(`input[name="q${index}"]:checked`);
+    if (selected) {
+      const answer = parseInt(selected.value, 10);
+      if (answer === q.answerIndex) {
+        alert(`Q${index+1}: Correct! ${q.explanation}`);
+      } else {
+        alert(`Q${index+1}: Incorrect. Correct answer: ${q.options[q.answerIndex]}. ${q.explanation}`);
+      }
+    } else {
+      alert(`Q${index+1}: No answer selected.`);
     }
+  });
+}
 
-    function render(){
-      const root = $('#questions');
-      root.innerHTML = '';
-      state.data.forEach((q, qi)=>{
-        const wrap = document.createElement('div');
-        wrap.className = 'card';
-        wrap.innerHTML = \`
-          <div><span class="badge">Q\${qi+1}</span> \${q.question_text}</div>
-          <div class="choices"></div>
-          <div class="ex" hidden>Answer: <strong></strong><br><span></span></div>
-        \`;
-        const choices = wrap.querySelector('.choices');
-        q.options.forEach((opt, oi)=>{
-          const label = document.createElement('label');
-          label.className = 'choice';
-          label.innerHTML = \`<input type="radio" name="q\${qi}" value="\${oi}"> <span>\${opt}</span>\`;
-          label.addEventListener('click', ()=>{ state.selected[qi] = oi; });
-          choices.appendChild(label);
-        });
-        root.appendChild(wrap);
-      });
-    }
-
-    function check(){
-      let correct = 0;
-      $$('#questions .card').forEach((wrap, qi)=>{
-        const q = state.data[qi];
-        const selected = state.selected[qi];
-        const labels = Array.from(wrap.querySelectorAll('.choice'));
-        labels.forEach((lab, oi)=>{
-          lab.classList.remove('correct', 'wrong');
-          if(oi === q.answerIndex) lab.classList.add('correct');
-          if(selected === oi && selected !== q.answerIndex) lab.classList.add('wrong');
-          const input = lab.querySelector('input');
-          if(selected === oi) input.checked = true;
-        });
-        if(selected === q.answerIndex) correct++;
-        const ex = wrap.querySelector('.ex');
-        ex.querySelector('strong').textContent = q.options[q.answerIndex];
-        ex.querySelector('span').textContent = q.explanation;
-        ex.hidden = false;
-      });
-      $('#score').textContent = \`Score: \${correct}/\${state.data.length}\`;
-    }
-
-    function show(){
-      $$('#questions .card').forEach((wrap, qi)=>{
-        const q = state.data[qi];
-        const labels = Array.from(wrap.querySelectorAll('.choice'));
-        labels.forEach((lab, oi)=>{
-          lab.classList.toggle('correct', oi === q.answerIndex);
-        });
-        const ex = wrap.querySelector('.ex');
-        ex.querySelector('strong').textContent = q.options[q.answerIndex];
-        ex.querySelector('span').textContent = q.explanation;
-        ex.hidden = false;
-      });
-    }
-
-    $('#check').addEventListener('click', check);
-    $('#show').addEventListener('click', show);
-    loadQuestions();
-  </script>
+document.addEventListener('DOMContentLoaded', loadQuestions);
+</script>
 </body>
 </html>
